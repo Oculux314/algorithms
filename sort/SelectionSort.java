@@ -1,4 +1,4 @@
-package sortalgorithms;
+
 
 public class SelectionSort {
   
