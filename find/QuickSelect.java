@@ -1,4 +1,4 @@
-package algorithms;
+package find;
 
 public class QuickSelect {
   
