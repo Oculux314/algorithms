@@ -1,4 +1,4 @@
-package com.oculux.se284.datastructures.trees;
+package com.oculux.se284.datastructures.disjointset;
 
 public class DisjointSet {
 

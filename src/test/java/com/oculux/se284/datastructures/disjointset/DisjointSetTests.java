@@ -1,4 +1,4 @@
-package com.oculux.se284.datastructures.trees;
+package com.oculux.se284.datastructures.disjointset;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -11,20 +11,20 @@ public class DisjointSetTests {
   @Test
   public void testEmpty() {
     try {
-      DisjointSet set = new DisjointSet(0);
-      assert(false);
+      new DisjointSet(0);
+      assert (false);
     } catch (IllegalArgumentException e) {
-      assert(true);
+      assert (true);
     }
   }
 
   @Test
   public void testNegativeSize() {
     try {
-      DisjointSet set = new DisjointSet(-1);
-      assert(false);
+      new DisjointSet(-1);
+      assert (false);
     } catch (IllegalArgumentException e) {
-      assert(true);
+      assert (true);
     }
   }
 
@@ -33,7 +33,7 @@ public class DisjointSetTests {
     DisjointSet set = new DisjointSet(1);
     assertEquals(0, set.find(0));
   }
-  
+
   @Test
   public void testSelfConnected() {
     DisjointSet set = new DisjointSet(1);
