@@ -6,7 +6,7 @@ import com.oculux.se284.datastructures.lists.DynamicArray;
 import com.oculux.se284.datastructures.lists.List;
 import org.junit.Test;
 
-public abstract class SortTest {
+public abstract class SortTests {
 
   protected abstract void sort(List list);
 
