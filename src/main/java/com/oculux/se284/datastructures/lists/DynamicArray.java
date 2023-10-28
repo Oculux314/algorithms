@@ -2,11 +2,12 @@ package com.oculux.se284.datastructures.lists;
 
 public class DynamicArray implements List {
 
+  private static final int DEFAULT_SIZE = 8;
   private int[] array;
   private int size;
 
   public DynamicArray() {
-    this(10);
+    this(DEFAULT_SIZE);
   }
 
   public DynamicArray(int size) {
@@ -16,8 +17,8 @@ public class DynamicArray implements List {
 
   @Override
   public void add(int value) {
-    if (size() == maxSize()) {
-      throw new UnsupportedOperationException("Resizing not implemented");
+    if (size() >= maxSize()) {
+      resize(maxSize() * 2);
     }
 
     array[size()] = value;
@@ -38,6 +39,10 @@ public class DynamicArray implements List {
     if (size() == 0) {
       throw new UnsupportedOperationException("Cannot remove from empty list");
     }
+    
+    if (size() < maxSize() / 4 && maxSize() > DEFAULT_SIZE) {
+      resize(maxSize() / 2);
+    }
 
     array[size() - 1] = 0;
     size--;
@@ -55,5 +60,13 @@ public class DynamicArray implements List {
 
   private int maxSize() {
     return array.length;
+  }
+
+  private void resize(int newSize) {
+    int[] newArray = new int[newSize];
+    for (int i = 0; i < maxSize(); i++) {
+      newArray[i] = array[i];
+    }
+    array = newArray;
   }
 }

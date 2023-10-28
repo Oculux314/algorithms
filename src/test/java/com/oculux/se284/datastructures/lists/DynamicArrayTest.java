@@ -41,4 +41,24 @@ public class DynamicArrayTest {
     array.remove();
     assertEquals(0, array.size());
   }
+
+  @Test
+  public void testSizeAfterAddMany() {
+    DynamicArray array = new DynamicArray();
+    for (int i = 0; i < 100; i++) {
+      array.add(i);
+    }
+    assertEquals(100, array.size());
+  }
+
+  @Test
+  public void testGetAfterAddMany() {
+    DynamicArray array = new DynamicArray();
+    for (int i = 0; i < 100; i++) {
+      array.add(i);
+    }
+    for (int i = 0; i < 100; i++) {
+      assertEquals(i, array.get(i));
+    }
+  }
 }
