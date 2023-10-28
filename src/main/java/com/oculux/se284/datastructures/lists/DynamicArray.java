@@ -26,15 +26,6 @@ public class DynamicArray implements List {
   }
 
   @Override
-  public void set(int index, int value) {
-    if (index >= size()) {
-      throw new IndexOutOfBoundsException("Index " + index + " is out of bounds");
-    }
-
-    array[index] = value;
-  }
-
-  @Override
   public void remove() {
     if (size() == 0) {
       throw new UnsupportedOperationException("Cannot remove from empty list");
@@ -51,6 +42,15 @@ public class DynamicArray implements List {
   @Override
   public int get(int index) {
     return array[index];
+  }
+
+  @Override
+  public void set(int index, int value) {
+    if (index >= size()) {
+      throw new IndexOutOfBoundsException("Index " + index + " is out of bounds");
+    }
+
+    array[index] = value;
   }
 
   @Override

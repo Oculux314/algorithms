@@ -36,12 +36,6 @@ public class LinkedList implements List {
   }
 
   @Override
-  public void set(int index, int value) {
-    Node node = getNode(index);
-    node.value = value;
-  }
-
-  @Override
   public void remove() {
     if (size() == 0) {
       throw new IndexOutOfBoundsException("Cannot remove from empty list");
@@ -63,6 +57,12 @@ public class LinkedList implements List {
   public int get(int index) {
     Node node = getNode(index);
     return node.value;
+  }
+
+  @Override
+  public void set(int index, int value) {
+    Node node = getNode(index);
+    node.value = value;
   }
 
   @Override
