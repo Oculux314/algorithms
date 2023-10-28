@@ -2,18 +2,19 @@ package com.oculux.se284.datastructures.lists;
 
 public class LinkedList implements List {
 
-  private class Node {
-    int value;
-    Node next;
+  protected class Node {
+    private int value;
+    protected Node next;
 
-    Node(int value) {
+    Node(int value, Node next) {
       this.value = value;
+      this.next = next;
     }
   }
 
-  private Node head;
-  private Node tail;
-  private int size;
+  protected Node head;
+  protected Node tail;
+  protected int size;
 
   public LinkedList() {
     head = null;
@@ -23,7 +24,7 @@ public class LinkedList implements List {
 
   @Override
   public void add(int value) {
-    Node newNode = new Node(value);
+    Node newNode = new Node(value, null);
 
     if (head == null) {
       head = newNode;
@@ -70,8 +71,8 @@ public class LinkedList implements List {
     return size;
   }
 
-  private Node getNode(int index) {
-    if (index >= size()) {
+  protected Node getNode(int index) {
+    if (index >= size() || index < 0) {
       throw new IndexOutOfBoundsException("Index " + index + " is out of bounds");
     }
 
