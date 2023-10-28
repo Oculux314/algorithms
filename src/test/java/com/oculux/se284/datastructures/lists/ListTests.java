@@ -4,7 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.Test;
 
-public abstract class ListTest {
+public abstract class ListTests {
 
   protected abstract List createList();
 

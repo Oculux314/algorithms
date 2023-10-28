@@ -1,6 +1,6 @@
 package com.oculux.se284.datastructures.lists;
 
-public class LinkedListTest extends ListTest {
+public class LinkedListTests extends ListTests {
   
   @Override
   protected List createList() {
