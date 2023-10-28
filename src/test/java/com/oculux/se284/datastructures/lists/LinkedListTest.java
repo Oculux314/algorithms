@@ -1,9 +1,9 @@
 package com.oculux.se284.datastructures.lists;
 
-public class DynamicArrayTest extends ListTest {
-
+public class LinkedListTest extends ListTest {
+  
   @Override
   protected List createList() {
-    return new DynamicArray();
+    return new LinkedList();
   }
 }
