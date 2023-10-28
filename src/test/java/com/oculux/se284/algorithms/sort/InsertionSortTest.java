@@ -1,6 +1,5 @@
 package com.oculux.se284.algorithms.sort;
 
-import com.oculux.se284.algorithms.InsertionSort;
 import com.oculux.se284.datastructures.lists.List;
 
 public class InsertionSortTest extends SortTest {

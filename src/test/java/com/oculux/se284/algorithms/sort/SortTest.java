@@ -38,4 +38,18 @@ public abstract class SortTest {
     sort(list);
     assertListEquals(createList(new int[] {-5, 1, 2, 4}), list);
   }
+
+  @Test
+  public void testDuplicates() {
+    List list = createList(new int[] {1, 2, 1, 4});
+    sort(list);
+    assertListEquals(createList(new int[] {1, 1, 2, 4}), list);
+  }
+
+  @Test
+  public void testEmpty() {
+    List list = createList();
+    sort(list);
+    assertListEquals(createList(), list);
+  }
 }
