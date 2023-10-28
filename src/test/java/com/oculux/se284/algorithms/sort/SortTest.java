@@ -1,0 +1,41 @@
+package com.oculux.se284.algorithms.sort;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import com.oculux.se284.datastructures.lists.DynamicArray;
+import com.oculux.se284.datastructures.lists.List;
+import org.junit.Test;
+
+public abstract class SortTest {
+
+  protected abstract void sort(List list);
+
+  private List createList(int... values) {
+    List list = new DynamicArray();
+    for (int value : values) {
+      list.add(value);
+    }
+    return list;
+  }
+
+  @Test
+  public void testAlreadySorted() {
+    List list = createList(new int[] {1, 2, 3});
+    sort(list);
+    assertEquals(createList(new int[] {1, 2, 3}), list);
+  }
+
+  @Test
+  public void testAntisorted() {
+    List list = createList(new int[] {3, 2, 1});
+    sort(list);
+    assertEquals(createList(new int[] {1, 2, 3}), list);
+  }
+
+  @Test
+  public void testNegative() {
+    List list = createList(new int[] {-5, 2, 1, 4});
+    sort(list);
+    assertEquals(createList(new int[] {-5, 1, 2, 4}), list);
+  }
+}
