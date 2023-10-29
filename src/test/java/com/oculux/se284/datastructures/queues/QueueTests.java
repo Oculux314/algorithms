@@ -5,9 +5,9 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.junit.jupiter.api.Test;
 
 public abstract class QueueTests {
-  
+
   protected abstract Queue createQueue();
-  
+
   @Test
   public void testSizeEmpty() {
     Queue queue = createQueue();
@@ -36,5 +36,20 @@ public abstract class QueueTests {
       queue.put(i);
     }
     assertEquals(100, queue.size());
+  }
+
+  @Test
+  public void testAddOne() {
+    Queue queue = createQueue();
+    queue.put(6);
+    assertEquals(6, queue.pop());
+  }
+
+  @Test
+  public void testPeek() {
+    Queue queue = createQueue();
+    queue.put(6);
+    assertEquals(6, queue.peek());
+    assertEquals(6, queue.peek());
   }
 }
