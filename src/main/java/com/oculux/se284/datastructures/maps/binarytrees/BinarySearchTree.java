@@ -1,14 +1,9 @@
 package com.oculux.se284.datastructures.maps.binarytrees;
 
 import com.oculux.se284.datastructures.maps.Map;
+import com.oculux.se284.datastructures.maps.NodeNotFoundException;
 
 public class BinarySearchTree implements Map {
-
-  private class NodeNotFoundException extends Exception {
-    public NodeNotFoundException(int key) {
-      super("Node with key " + key + " not found");
-    }
-  }
 
   private class Node {
     private int key;
@@ -63,7 +58,7 @@ public class BinarySearchTree implements Map {
     try {
       node = getNode(key);
     } catch (NodeNotFoundException e) {
-      throw new IllegalArgumentException("Key " + key + " not found");
+      throw new IllegalArgumentException(e);
     }
 
     if (node.left == null && node.right == null) {
@@ -95,7 +90,7 @@ public class BinarySearchTree implements Map {
     try {
       return getNode(key).value;
     } catch (NodeNotFoundException e) {
-      throw new IllegalArgumentException("Key " + key + " not found");
+      throw new IllegalArgumentException(e);
     }
   }
 
