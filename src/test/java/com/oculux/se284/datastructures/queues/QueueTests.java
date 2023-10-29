@@ -52,4 +52,18 @@ public abstract class QueueTests {
     assertEquals(6, queue.peek());
     assertEquals(6, queue.peek());
   }
+
+  @Test
+  public void testAddTwo() {
+    testAddTwoImplementation();
+  }
+
+  protected abstract void testAddTwoImplementation();
+
+  @Test
+  public void testAddMany() {
+    testAddManyImplementation();
+  }
+
+  protected abstract void testAddManyImplementation();
 }

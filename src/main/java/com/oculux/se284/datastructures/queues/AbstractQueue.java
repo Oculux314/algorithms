@@ -1,6 +1,5 @@
 package com.oculux.se284.datastructures.queues;
 
-import com.oculux.se284.datastructures.lists.DoubleLinkedList;
 import com.oculux.se284.datastructures.lists.LinkedList;
 
 public abstract class AbstractQueue implements Queue {
@@ -8,7 +7,7 @@ public abstract class AbstractQueue implements Queue {
   protected LinkedList list;
 
   public AbstractQueue() {
-    list = new DoubleLinkedList();
+    list = new LinkedList();
   }
 
   @Override
