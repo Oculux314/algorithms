@@ -12,8 +12,8 @@ public class LinkedList implements List {
     }
   }
 
-  private Node head;
-  private Node tail;
+  protected Node head;
+  protected Node tail;
   protected int size;
 
   public LinkedList() {
@@ -24,7 +24,7 @@ public class LinkedList implements List {
 
   @Override
   public void add(int value) {
-    Node newNode = new Node(value, null);
+    Node newNode = makeNewNodeAtFront(value);
 
     if (head == null) {
       head = newNode;
@@ -84,9 +84,17 @@ public class LinkedList implements List {
     return node;
   }
 
+  protected Node makeNewNodeAtEnd(int value) {
+    return new Node(value, null);
+  }
+
+  protected Node makeNewNodeAtFront(int value) {
+    return new Node(value, head);
+  }
+
   @Deprecated
   public void addToFront(int value) {
-    Node newNode = new Node(value, head);
+    Node newNode = makeNewNodeAtFront(value);
     head = newNode;
 
     if (size() == 0) {

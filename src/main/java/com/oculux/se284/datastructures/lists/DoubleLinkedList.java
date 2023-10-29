@@ -12,17 +12,14 @@ public class DoubleLinkedList extends LinkedList {
     }
   }
 
-  private Dinode head;
-  private Dinode tail;
-
   @Override
   public void add(int value) {
-    Dinode newNode = new Dinode(value, null, tail);
+    Dinode newNode = (Dinode) makeNewNodeAtEnd(value);
 
     if (head == null) {
       head = newNode;
     } else {
-      (tail).next = newNode;
+      ((Dinode) tail).next = newNode;
     }
 
     tail = newNode;
@@ -38,12 +35,12 @@ public class DoubleLinkedList extends LinkedList {
     Dinode node;
 
     if (index < size() / 2) {
-      node = head;
+      node = (Dinode) head;
       for (int i = 0; i < index; i++) {
         node = node.next;
       }
     } else {
-      node = tail;
+      node = (Dinode) tail;
       for (int i = size() - 1; i > index; i--) {
         node = node.prev;
       }
@@ -53,9 +50,19 @@ public class DoubleLinkedList extends LinkedList {
   }
 
   @Override
+  protected Node makeNewNodeAtEnd(int value) {
+    return new Dinode(value, null, (Dinode) tail);
+  }
+
+  @Override
+  protected Node makeNewNodeAtFront(int value) {
+    return new Dinode(value, (Dinode) head, null);
+  }
+
+  @Override
   @Deprecated
   public void addToFront(int value) {
-    Dinode newNode = new Dinode(value, head, null);
+    Dinode newNode = (Dinode) makeNewNodeAtFront(value);
     head = newNode;
 
     if (size() == 0) {

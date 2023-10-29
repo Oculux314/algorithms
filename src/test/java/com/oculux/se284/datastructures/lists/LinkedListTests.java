@@ -6,4 +6,6 @@ public class LinkedListTests extends ListTests {
   protected List createList() {
     return new LinkedList();
   }
+
+  
 }
