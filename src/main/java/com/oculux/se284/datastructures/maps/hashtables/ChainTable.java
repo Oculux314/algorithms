@@ -24,7 +24,7 @@ public class ChainTable implements HashTable {
     }
   }
 
-  private static final int DEFAULT_CAPACITY = 10;
+  private static final int DEFAULT_CAPACITY = 8;
   private List<List<Node>> table;
   private int numElements;
 
@@ -34,11 +34,7 @@ public class ChainTable implements HashTable {
 
   public ChainTable(int capacity) {
     this.numElements = 0;
-    table = new ArrayList<List<Node>>(capacity);
-
-    for (int i = 0; i < capacity; i++) {
-      table.add(new ArrayList<Node>());
-    }
+    table = makeEmptyTable(capacity);
   }
 
   @Override
@@ -47,10 +43,7 @@ public class ChainTable implements HashTable {
       Node node = getNode(key);
       node.value = value;
     } catch (NodeNotFoundException e) {
-      Node node = new Node(key, value);
-      List<Node> chain = getChain(key);
-      chain.add(node);
-      numElements++;
+      addNode(key, value);
     }
   }
 
@@ -59,8 +52,7 @@ public class ChainTable implements HashTable {
     try {
       List<Node> chain = getChain(key);
       int index = getChainIndex(chain, key);
-      chain.remove(index);
-      numElements--;
+      removeNode(chain, index);
     } catch (NodeNotFoundException e) {
       throw new IllegalArgumentException(e);
     }
@@ -117,5 +109,49 @@ public class ChainTable implements HashTable {
     List<Node> chain = getChain(key);
     int index = getChainIndex(chain, key);
     return chain.get(index);
+  }
+
+  private List<List<Node>> makeEmptyTable(int capacity) {
+    List<List<Node>> table = new ArrayList<List<Node>>(capacity);
+    for (int i = 0; i < capacity; i++) {
+      table.add(new ArrayList<Node>());
+    }
+    return table;
+  }
+
+  private void addNodeWithoutUpdatingSize(int key, int value) {
+    Node node = new Node(key, value);
+    List<Node> chain = getChain(key);
+    chain.add(node);
+  }
+
+  private void addNode(int key, int value) {
+    addNodeWithoutUpdatingSize(key, value);
+    numElements++;
+
+    if (numElements > getCapacity() * 0.75) {
+      resize(getCapacity() * 2);
+    }
+  }
+
+  private void removeNode(List<Node> chain, int index) {
+    chain.remove(index);
+    numElements--;
+
+    if (numElements < getCapacity() * 0.5 && getCapacity() > DEFAULT_CAPACITY) {
+      resize(getCapacity() / 2);
+    }
+  }
+
+  private void resize(int newCapacity) {
+    List<List<Node>> oldTable = table;
+    table = makeEmptyTable(newCapacity);
+
+    for (int i = 0; i < oldTable.size(); i++) {
+      List<Node> chain = oldTable.get(i);
+      for (Node node : chain) {
+        addNodeWithoutUpdatingSize(node.key, node.value);
+      }
+    }
   }
 }
