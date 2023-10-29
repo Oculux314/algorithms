@@ -6,24 +6,6 @@ import java.util.List;
 
 public class ChainTable implements HashTable {
 
-  private class Node {
-    private int key;
-    private int value;
-
-    public Node(int key, int value) {
-      this.key = key;
-      this.value = value;
-    }
-
-    public int getKey() {
-      return this.key;
-    }
-
-    public int getValue() {
-      return this.value;
-    }
-  }
-
   private static final int DEFAULT_CAPACITY = 8;
   private List<List<Node>> table;
   private int numElements;
@@ -43,7 +25,7 @@ public class ChainTable implements HashTable {
       Node node = getNode(key);
       node.value = value;
     } catch (NodeNotFoundException e) {
-      addNode(key, value);
+      createAndAddNode(key, value);
     }
   }
 
@@ -88,11 +70,10 @@ public class ChainTable implements HashTable {
   }
 
   private List<Node> getChain(int key) {
-    if (key < 0) {
-      key *= -1;
-    }
-
     int index = Integer.hashCode(key) % getCapacity();
+    if (index < 0) {
+      index += getCapacity();
+    }
     return table.get(index);
   }
 
@@ -112,21 +93,21 @@ public class ChainTable implements HashTable {
   }
 
   private List<List<Node>> makeEmptyTable(int capacity) {
-    List<List<Node>> table = new ArrayList<List<Node>>(capacity);
+    List<List<Node>> table = new ArrayList<>(capacity);
     for (int i = 0; i < capacity; i++) {
       table.add(new ArrayList<Node>());
     }
     return table;
   }
 
-  private void addNodeWithoutUpdatingSize(int key, int value) {
-    Node node = new Node(key, value);
+  private void addNode(int key, Node node) {
     List<Node> chain = getChain(key);
     chain.add(node);
   }
 
-  private void addNode(int key, int value) {
-    addNodeWithoutUpdatingSize(key, value);
+  private void createAndAddNode(int key, int value) {
+    Node node = new Node(key, value);
+    addNode(key, node);
     numElements++;
 
     if (numElements > getCapacity() * 0.75) {
@@ -150,7 +131,7 @@ public class ChainTable implements HashTable {
     for (int i = 0; i < oldTable.size(); i++) {
       List<Node> chain = oldTable.get(i);
       for (Node node : chain) {
-        addNodeWithoutUpdatingSize(node.key, node.value);
+        addNode(node.key, node);
       }
     }
   }
