@@ -152,4 +152,53 @@ public abstract class MapTests {
     map.put(0, 6);
     assertEquals(6, map.get(0));
   }
+
+  @Test
+  public void testSizeEmpty() {
+    Map map = createMap();
+    assertEquals(0, map.size());
+  }
+
+  @Test
+  public void testSizeAfterPut() {
+    Map map = createMap();
+    map.put(0, 0);
+    assertEquals(1, map.size());
+  }
+
+  @Test
+  public void testSizeAfterPutNegative() {
+    Map map = createMap();
+    map.put(-1, 0);
+    assertEquals(1, map.size());
+  }
+
+  @Test
+  public void testSizeAfterManyPuts() {
+    Map map = createMap();
+    for (int i = 0; i < 100; i++) {
+      map.put(i, i);
+    }
+    assertEquals(100, map.size());
+  }
+
+  @Test
+  public void testSizeAfterRemove() {
+    Map map = createMap();
+    map.put(0, 0);
+    map.remove(0);
+    assertEquals(0, map.size());
+  }
+
+  @Test
+  public void testSizeAfterManyRemoves() {
+    Map map = createMap();
+    for (int i = 0; i < 100; i++) {
+      map.put(i, i);
+    }
+    for (int i = 0; i < 60; i++) {
+      map.remove(i);
+    }
+    assertEquals(40, map.size());
+  }
 }

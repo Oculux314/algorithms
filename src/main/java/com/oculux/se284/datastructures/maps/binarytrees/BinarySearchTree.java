@@ -16,10 +16,12 @@ public class BinarySearchTree implements Map {
       this.key = key;
       this.value = value;
       this.parent = parent;
+      size++;
     }
   }
 
   private Node root = null;
+  private int size = 0;
 
   public void put(int key, int value) {
     if (root == null) {
@@ -73,6 +75,8 @@ public class BinarySearchTree implements Map {
       node.value = nextLarger.value;
       connectParentToChild(nextLarger, nextLarger.right);
     }
+
+    size--;
   }
 
   @Override
@@ -92,6 +96,11 @@ public class BinarySearchTree implements Map {
     } catch (NodeNotFoundException e) {
       throw new IllegalArgumentException(e);
     }
+  }
+
+  @Override
+  public int size() {
+    return size;
   }
 
   private Node getNode(int key) throws NodeNotFoundException {

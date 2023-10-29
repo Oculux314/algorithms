@@ -26,14 +26,14 @@ public class ChainTable implements HashTable {
 
   private static final int DEFAULT_CAPACITY = 10;
   private List<List<Node>> table;
-  private int capacity;
+  private int numElements;
 
   public ChainTable() {
     this(DEFAULT_CAPACITY);
   }
 
   public ChainTable(int capacity) {
-    this.capacity = capacity;
+    this.numElements = 0;
     table = new ArrayList<List<Node>>(capacity);
 
     for (int i = 0; i < capacity; i++) {
@@ -50,6 +50,7 @@ public class ChainTable implements HashTable {
       Node node = new Node(key, value);
       List<Node> chain = getChain(key);
       chain.add(node);
+      numElements++;
     }
   }
 
@@ -59,6 +60,7 @@ public class ChainTable implements HashTable {
       List<Node> chain = getChain(key);
       int index = getChainIndex(chain, key);
       chain.remove(index);
+      numElements--;
     } catch (NodeNotFoundException e) {
       throw new IllegalArgumentException(e);
     }
@@ -84,12 +86,21 @@ public class ChainTable implements HashTable {
     }
   }
 
+  @Override
+  public int size() {
+    return numElements;
+  }
+
+  private int getCapacity() {
+    return table.size();
+  }
+
   private List<Node> getChain(int key) {
     if (key < 0) {
       key *= -1;
     }
 
-    int index = Integer.hashCode(key) % capacity;
+    int index = Integer.hashCode(key) % getCapacity();
     return table.get(index);
   }
 

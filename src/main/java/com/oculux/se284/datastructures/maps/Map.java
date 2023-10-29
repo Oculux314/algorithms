@@ -9,4 +9,6 @@ public interface Map {
   boolean contains(int key);
 
   int get(int key);
+
+  int size();
 }
