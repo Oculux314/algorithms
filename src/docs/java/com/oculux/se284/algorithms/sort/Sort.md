@@ -1,10 +1,10 @@
 # Comparison
 
-| Complexity | Selection | Insertion | Merge (In-Place) | Merge (Stable) |     Quick     |   Heap    | Counting |
-| :--------- | :-------: | :-------: | :--------------: | :------------: | :-----------: | :-------: | :------: |
-| `Time`     |   $n^2$   | $n^2$`*`  |    $nlog(n)$     |   $nlog(n)$    | $nlog(n)$`**` | $nlog(n)$ |   $n$    |
-| `Space`    |    $1$    |    $1$    |       $1$        |    $n$`***`    |  $log(n)$`^`  |    $1$    | $1$`^^`  |
-| `Stable?`  |    No     |    Yes    |        No        |      Yes       |      No       |    No     | No`^^^`  |
+| Element   | Selection | Insertion | Merge (In-Place) | Merge (Stable) |     Quick     |   Heap    | Counting |
+| :-------- | :-------: | :-------: | :--------------: | :------------: | :-----------: | :-------: | :------: |
+| `Time`    |   $n^2$   | $n^2$`*`  |    $nlog(n)$     |   $nlog(n)$    | $nlog(n)$`**` | $nlog(n)$ |   $n$    |
+| `Space`   |    $1$    |    $1$    |       $1$        |    $n$`***`    |  $log(n)$`^`  |    $1$    | $1$`^^`  |
+| `Stable?` |    No     |    Yes    |        No        |      Yes       |      No       |    No     | No`^^^`  |
 
 `*` $n$ when list is already sorted.  
 `**` Usually faster than mergesort.  
