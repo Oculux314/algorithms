@@ -4,7 +4,7 @@ public class LinkedList implements List {
 
   protected class Node {
     private int value;
-    protected Node next;
+    private Node next;
 
     Node(int value, Node next) {
       this.value = value;
@@ -12,8 +12,8 @@ public class LinkedList implements List {
     }
   }
 
-  protected Node head;
-  protected Node tail;
+  private Node head;
+  private Node tail;
   protected int size;
 
   public LinkedList() {
@@ -82,5 +82,33 @@ public class LinkedList implements List {
     }
 
     return node;
+  }
+
+  @Deprecated
+  public void addToFront(int value) {
+    Node newNode = new Node(value, head);
+    head = newNode;
+
+    if (size() == 0) {
+      tail = newNode;
+    }
+
+    size++;
+  }
+
+  @Deprecated
+  public void removeFromFront() {
+    if (size() == 0) {
+      throw new IndexOutOfBoundsException("Cannot remove from empty list");
+    }
+
+    if (size() == 1) {
+      head = null;
+      tail = null;
+    } else {
+      head = head.next;
+    }
+
+    size--;
   }
 }
