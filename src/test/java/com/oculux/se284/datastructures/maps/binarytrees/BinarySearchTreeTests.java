@@ -1,8 +1,7 @@
-package com.oculux.se284.datastructures.maps.trees;
+package com.oculux.se284.datastructures.maps.binarytrees;
 
 import com.oculux.se284.datastructures.maps.Map;
 import com.oculux.se284.datastructures.maps.MapTests;
-import com.oculux.se284.datastructures.maps.binarytrees.BinarySearchTree;
 
 public class BinarySearchTreeTests extends MapTests {
 
