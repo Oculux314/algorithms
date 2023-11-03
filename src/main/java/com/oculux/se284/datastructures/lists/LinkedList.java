@@ -1,12 +1,12 @@
 package com.oculux.se284.datastructures.lists;
 
-public class LinkedList implements List {
+public class LinkedList<T> implements List<T> {
 
   protected class Node {
-    private int value;
+    private T value;
     private Node next;
 
-    Node(int value, Node next) {
+    Node(T value, Node next) {
       this.value = value;
       this.next = next;
     }
@@ -23,7 +23,7 @@ public class LinkedList implements List {
   }
 
   @Override
-  public void add(int value) {
+  public void add(T value) {
     Node newNode = makeNewNodeAtFront(value);
 
     if (head == null) {
@@ -55,13 +55,13 @@ public class LinkedList implements List {
   }
 
   @Override
-  public int get(int index) {
+  public T get(int index) {
     Node node = getNode(index);
     return node.value;
   }
 
   @Override
-  public void set(int index, int value) {
+  public void set(int index, T value) {
     Node node = getNode(index);
     node.value = value;
   }
@@ -84,16 +84,16 @@ public class LinkedList implements List {
     return node;
   }
 
-  protected Node makeNewNodeAtEnd(int value) {
+  protected Node makeNewNodeAtEnd(T value) {
     return new Node(value, null);
   }
 
-  protected Node makeNewNodeAtFront(int value) {
+  protected Node makeNewNodeAtFront(T value) {
     return new Node(value, head);
   }
 
   @Deprecated
-  public void addToFront(int value) {
+  public void addToFront(T value) {
     Node newNode = makeNewNodeAtFront(value);
     head = newNode;
 

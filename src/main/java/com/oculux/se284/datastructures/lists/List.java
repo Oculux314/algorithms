@@ -1,14 +1,14 @@
 package com.oculux.se284.datastructures.lists;
 
-public interface List {
+public interface List<T> {
 
-  void add(int value);
+  void add(T value);
 
   void remove();
 
-  int get(int index);
+  T get(int index);
 
-  void set(int index, int value);
+  void set(int index, T value);
 
   int size();
 }

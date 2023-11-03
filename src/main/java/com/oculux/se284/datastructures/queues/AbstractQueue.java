@@ -2,26 +2,26 @@ package com.oculux.se284.datastructures.queues;
 
 import com.oculux.se284.datastructures.lists.LinkedList;
 
-public abstract class AbstractQueue implements Queue {
+public abstract class AbstractQueue<T> implements Queue<T> {
 
-  protected LinkedList list;
+  protected LinkedList<T> list;
 
   public AbstractQueue() {
-    list = new LinkedList();
+    list = new LinkedList<>();
   }
 
   @Override
-  public abstract void put(int value);
+  public abstract void put(T value);
 
   @Override
-  public int pop() {
-    int value = peek();
+  public T pop() {
+    T value = peek();
     list.remove();
     return value;
   }
 
   @Override
-  public int peek() {
+  public T peek() {
     return list.get(size() - 1);
   }
 

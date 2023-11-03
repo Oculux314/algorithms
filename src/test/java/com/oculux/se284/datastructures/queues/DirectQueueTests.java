@@ -5,13 +5,13 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class DirectQueueTests extends QueueTests {
 
   @Override
-  protected Queue createQueue() {
-    return new DirectQueue();
+  protected <T> Queue<T> createQueue() {
+    return new DirectQueue<>();
   }
 
   @Override
   protected void testAddTwoImplementation() {
-    Queue queue = createQueue();
+    Queue<Integer> queue = createQueue();
     queue.put(6);
     queue.put(7);
     assertEquals(6, queue.pop());
@@ -20,7 +20,7 @@ public class DirectQueueTests extends QueueTests {
 
   @Override
   protected void testAddManyImplementation() {
-    Queue queue = createQueue();
+    Queue<Integer> queue = createQueue();
     for (int i = 0; i < 100; i++) {
       queue.put(i);
     }

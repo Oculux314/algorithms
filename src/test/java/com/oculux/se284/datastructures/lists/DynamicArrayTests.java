@@ -3,7 +3,7 @@ package com.oculux.se284.datastructures.lists;
 public class DynamicArrayTests extends ListTests {
 
   @Override
-  protected List createList() {
-    return new DynamicArray();
+  protected <T> List<T> createList() {
+    return new DynamicArray<>();
   }
 }

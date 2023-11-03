@@ -1,9 +1,9 @@
 package com.oculux.se284.datastructures.queues;
 
-public class Stack extends AbstractQueue {
+public class Stack<T> extends AbstractQueue<T> {
 
   @Override
-  public void put(int value) {
+  public void put(T value) {
     list.add(value);
   }
 }

@@ -1,12 +1,12 @@
 package com.oculux.se284.datastructures.queues;
 
-public interface Queue {
+public interface Queue<T> {
   
-  void put(int value);
+  void put(T value);
 
-  int pop();
+  T pop();
 
-  int peek();
+  T peek();
 
   int size();
 }

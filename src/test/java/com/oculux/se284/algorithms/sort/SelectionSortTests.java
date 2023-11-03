@@ -5,8 +5,7 @@ import com.oculux.se284.datastructures.lists.List;
 public class SelectionSortTests extends SortTests {
 
   @Override
-  protected void sort(List list) {
-    SelectionSort.run(list);
+  protected <T extends Comparable<? super T>> void sort(List<T> list) {
+    new SelectionSort<>(list).run();
   }
-  
 }

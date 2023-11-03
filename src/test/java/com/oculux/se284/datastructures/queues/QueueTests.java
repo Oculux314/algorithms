@@ -6,24 +6,24 @@ import org.junit.jupiter.api.Test;
 
 public abstract class QueueTests {
 
-  protected abstract Queue createQueue();
+  protected abstract <T> Queue<T> createQueue();
 
   @Test
   public void testSizeEmpty() {
-    Queue queue = createQueue();
+    Queue<Integer> queue = createQueue();
     assertEquals(0, queue.size());
   }
 
   @Test
   public void testSizeOne() {
-    Queue queue = createQueue();
+    Queue<Integer> queue = createQueue();
     queue.put(1);
     assertEquals(1, queue.size());
   }
 
   @Test
   public void testSizeDuplicates() {
-    Queue queue = createQueue();
+    Queue<Integer> queue = createQueue();
     queue.put(1);
     queue.put(1);
     assertEquals(2, queue.size());
@@ -31,7 +31,7 @@ public abstract class QueueTests {
 
   @Test
   public void testSizeMany() {
-    Queue queue = createQueue();
+    Queue<Integer> queue = createQueue();
     for (int i = 0; i < 100; i++) {
       queue.put(i);
     }
@@ -40,14 +40,14 @@ public abstract class QueueTests {
 
   @Test
   public void testAddOne() {
-    Queue queue = createQueue();
+    Queue<Integer> queue = createQueue();
     queue.put(6);
     assertEquals(6, queue.pop());
   }
 
   @Test
   public void testPeek() {
-    Queue queue = createQueue();
+    Queue<Integer> queue = createQueue();
     queue.put(6);
     assertEquals(6, queue.peek());
     assertEquals(6, queue.peek());

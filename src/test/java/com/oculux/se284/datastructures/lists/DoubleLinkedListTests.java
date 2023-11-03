@@ -3,7 +3,7 @@ package com.oculux.se284.datastructures.lists;
 public class DoubleLinkedListTests extends LinkedListTests {
 
   @Override
-  protected List createList() {
-    return new DoubleLinkedList();
+  protected <T> List<T> createList() {
+    return new DoubleLinkedList<>();
   }
 }

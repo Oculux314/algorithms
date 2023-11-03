@@ -1,9 +1,9 @@
 package com.oculux.se284.datastructures.lists;
 
-public class DynamicArray implements List {
+public class DynamicArray<T> implements List<T> {
 
   private static final int DEFAULT_SIZE = 8;
-  private int[] array;
+  private Object[] array;
   private int size;
 
   public DynamicArray() {
@@ -11,12 +11,12 @@ public class DynamicArray implements List {
   }
 
   public DynamicArray(int size) {
-    array = new int[size];
+    array = new Object[size];
     size = 0;
   }
 
   @Override
-  public void add(int value) {
+  public void add(T value) {
     if (size() >= maxSize()) {
       resize(maxSize() * 2);
     }
@@ -30,7 +30,7 @@ public class DynamicArray implements List {
     if (size() == 0) {
       throw new UnsupportedOperationException("Cannot remove from empty list");
     }
-    
+
     if (size() < maxSize() / 4 && maxSize() > DEFAULT_SIZE) {
       resize(maxSize() / 2);
     }
@@ -40,12 +40,18 @@ public class DynamicArray implements List {
   }
 
   @Override
-  public int get(int index) {
-    return array[index];
+  public T get(int index) {
+    if (index >= size() || index < 0) {
+      throw new IndexOutOfBoundsException("Index " + index + " is out of bounds");
+    }
+
+    @SuppressWarnings("unchecked")
+    T value = (T) array[index];
+    return value;
   }
 
   @Override
-  public void set(int index, int value) {
+  public void set(int index, T value) {
     if (index >= size()) {
       throw new IndexOutOfBoundsException("Index " + index + " is out of bounds");
     }
@@ -63,7 +69,7 @@ public class DynamicArray implements List {
   }
 
   private void resize(int newSize) {
-    int[] newArray = new int[newSize];
+    Object[] newArray = new Object[newSize];
     for (int i = 0; i < size(); i++) {
       newArray[i] = array[i];
     }

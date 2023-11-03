@@ -1,10 +1,9 @@
 package com.oculux.se284.datastructures.queues;
 
-public class DirectQueue extends AbstractQueue {
+public class DirectQueue<T> extends AbstractQueue<T> {
 
-  @SuppressWarnings("deprecation")
   @Override
-  public void put(int value) {
+  public void put(T value) {
     list.addToFront(value);
   }
 }

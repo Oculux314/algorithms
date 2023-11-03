@@ -1,19 +1,19 @@
 package com.oculux.se284.datastructures.lists;
 
-public class DoubleLinkedList extends LinkedList {
+public class DoubleLinkedList<T> extends LinkedList<T> {
 
   protected class Dinode extends Node {
     private Dinode prev;
     private Dinode next;
 
-    Dinode(int value, Dinode next, Dinode prev) {
+    Dinode(T value, Dinode next, Dinode prev) {
       super(value, next);
       this.prev = prev;
     }
   }
 
   @Override
-  public void add(int value) {
+  public void add(T value) {
     Dinode newNode = (Dinode) makeNewNodeAtEnd(value);
 
     if (head == null) {
@@ -50,18 +50,18 @@ public class DoubleLinkedList extends LinkedList {
   }
 
   @Override
-  protected Node makeNewNodeAtEnd(int value) {
+  protected Node makeNewNodeAtEnd(T value) {
     return new Dinode(value, null, (Dinode) tail);
   }
 
   @Override
-  protected Node makeNewNodeAtFront(int value) {
+  protected Node makeNewNodeAtFront(T value) {
     return new Dinode(value, (Dinode) head, null);
   }
 
   @Override
   @Deprecated
-  public void addToFront(int value) {
+  public void addToFront(T value) {
     Dinode newNode = (Dinode) makeNewNodeAtFront(value);
     head = newNode;
 

@@ -9,11 +9,12 @@ import org.junit.Test;
 
 public abstract class SortTests {
 
-  protected abstract void sort(List list);
+  protected abstract <T extends Comparable<? super T>> void sort(List<T> list);
 
-  private List createList(int... values) {
-    List list = new DynamicArray();
-    for (int value : values) {
+  @SafeVarargs
+  private final <T> List<T> createList(T... values) {
+    List<T> list = new DynamicArray<>();
+    for (T value : values) {
       list.add(value);
     }
     return list;
@@ -21,7 +22,7 @@ public abstract class SortTests {
 
   @Test
   public void testAlreadySorted() {
-    List list = createList(new int[] {1, 2, 3});
+    List<Integer> list = createList(1,2,3);
     sort(list);
     assertEquals(1, list.get(0));
     assertEquals(2, list.get(1));
@@ -30,7 +31,7 @@ public abstract class SortTests {
 
   @Test
   public void testAntisorted() {
-    List list = createList(new int[] {3, 2, 1});
+    List<Integer> list = createList(3, 2, 1);
     sort(list);
     assertEquals(1, list.get(0));
     assertEquals(2, list.get(1));
@@ -39,7 +40,7 @@ public abstract class SortTests {
 
   @Test
   public void testNegative() {
-    List list = createList(new int[] {-5, 2, 1, 4});
+    List<Integer> list = createList(-5, 2, 1, 4);
     sort(list);
     assertEquals(-5, list.get(0));
     assertEquals(1, list.get(1));
@@ -49,7 +50,7 @@ public abstract class SortTests {
 
   @Test
   public void testDuplicates() {
-    List list = createList(new int[] {1, 2, 1, 4});
+    List<Integer> list = createList(1, 2, 1, 4);
     sort(list);
     assertEquals(1, list.get(0));
     assertEquals(1, list.get(1));
@@ -59,7 +60,7 @@ public abstract class SortTests {
 
   @Test
   public void testEmpty() {
-    List list = createList();
+    List<Integer> list = createList();
     sort(list);
     assertEquals(0, list.size());
   }
