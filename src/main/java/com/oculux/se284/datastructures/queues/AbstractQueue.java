@@ -1,10 +1,11 @@
 package com.oculux.se284.datastructures.queues;
 
 import com.oculux.se284.datastructures.lists.LinkedList;
+import com.oculux.se284.datastructures.lists.List;
 
 public abstract class AbstractQueue<T> implements Queue<T> {
 
-  protected LinkedList<T> list;
+  protected List<T> list;
 
   public AbstractQueue() {
     list = new LinkedList<>();

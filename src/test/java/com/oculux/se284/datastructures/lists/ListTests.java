@@ -141,6 +141,13 @@ public abstract class ListTests {
   }
 
   @Test
+  public void addIndexAtEnd() {
+    List<Integer> list = createIndexTestsBaseList();
+    list.add(4, 3);
+    assertEquals(4, list.get(3));
+  }
+
+  @Test
   public void testIndexRemoveSize() {
     List<Integer> list = createIndexTestsBaseList();
     list.remove(1);
