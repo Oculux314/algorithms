@@ -4,6 +4,6 @@ public class DirectQueue<T> extends AbstractQueue<T> {
 
   @Override
   public void put(T value) {
-    list.addToFront(value);
+    // list.addToFront(value);
   }
 }
