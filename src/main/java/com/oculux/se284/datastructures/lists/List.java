@@ -4,7 +4,11 @@ public interface List<T> {
 
   void add(T value);
 
+  void add(T value, int index);
+
   void remove();
+
+  void remove(int index);
 
   T get(int index);
 

@@ -1,5 +1,7 @@
 package com.oculux.se284.datastructures.lists;
 
+import com.oculux.se284.Untested;
+
 public class DynamicArray<T> implements List<T> {
 
   private static final int DEFAULT_SIZE = 8;
@@ -25,6 +27,7 @@ public class DynamicArray<T> implements List<T> {
     size++;
   }
 
+  @Override
   public void add(T value, int index) {
     if (index > size() || index < 0) {
       throw new IndexOutOfBoundsException("Index " + index + " is out of bounds");
@@ -51,6 +54,7 @@ public class DynamicArray<T> implements List<T> {
     size--;
   }
 
+  @Override
   public void remove(int index) {
     if (index >= size() || index < 0) {
       throw new IndexOutOfBoundsException("Index " + index + " is out of bounds");
@@ -97,5 +101,20 @@ public class DynamicArray<T> implements List<T> {
       newArray[i] = array[i];
     }
     array = newArray;
+  }
+
+  @Untested
+  @Override
+  public String toString() {
+    StringBuilder builder = new StringBuilder();
+    builder.append("[");
+    for (int i = 0; i < size(); i++) {
+      builder.append(array[i]);
+      if (i < size() - 1) {
+        builder.append(", ");
+      }
+    }
+    builder.append("]");
+    return builder.toString();
   }
 }
