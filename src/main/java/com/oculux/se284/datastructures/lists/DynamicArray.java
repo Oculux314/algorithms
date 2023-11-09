@@ -25,6 +25,18 @@ public class DynamicArray<T> implements List<T> {
     size++;
   }
 
+  public void add(T value, int index) {
+    if (index > size() || index < 0) {
+      throw new IndexOutOfBoundsException("Index " + index + " is out of bounds");
+    }
+
+    add(value);
+    for (int i = size() - 1; i > index; i--) {
+      array[i] = array[i - 1];
+    }
+    array[index] = value;
+  }
+
   @Override
   public void remove() {
     if (size() == 0) {
@@ -37,6 +49,17 @@ public class DynamicArray<T> implements List<T> {
 
     array[size() - 1] = 0;
     size--;
+  }
+
+  public void remove(int index) {
+    if (index >= size() || index < 0) {
+      throw new IndexOutOfBoundsException("Index " + index + " is out of bounds");
+    }
+
+    for (int i = index; i < size() - 1; i++) {
+      array[i] = array[i + 1];
+    }
+    remove();
   }
 
   @Override
