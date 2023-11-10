@@ -23,23 +23,23 @@ public abstract class RotationTree extends BinarySearchTree {
 
     Node grandparent = parent.parent;
     if (grandparent == null) {
-      connectNodes(null, null, node);
+      breakAndConnectNodes(null, null, node);
     } else if (grandparent.left == parent) {
-      connectNodes(grandparent, Branch.LEFT, node);
+      breakAndConnectNodes(grandparent, Branch.LEFT, node);
     } else {
-      connectNodes(grandparent, Branch.RIGHT, node);
+      breakAndConnectNodes(grandparent, Branch.RIGHT, node);
     }
 
     if (isClockwiseRotation) {
-      connectNodes(node, Branch.LEFT, leftTree);
-      connectNodes(node, Branch.RIGHT, parent);
-      connectNodes(parent, Branch.LEFT, middleTree);
-      connectNodes(parent, Branch.RIGHT, rightTree);
+      breakAndConnectNodes(node, Branch.LEFT, leftTree);
+      breakAndConnectNodes(node, Branch.RIGHT, parent);
+      breakAndConnectNodes(parent, Branch.LEFT, middleTree);
+      breakAndConnectNodes(parent, Branch.RIGHT, rightTree);
     } else {
-      connectNodes(node, Branch.LEFT, parent);
-      connectNodes(node, Branch.RIGHT, rightTree);
-      connectNodes(parent, Branch.LEFT, leftTree);
-      connectNodes(parent, Branch.RIGHT, middleTree);
+      breakAndConnectNodes(node, Branch.LEFT, parent);
+      breakAndConnectNodes(node, Branch.RIGHT, rightTree);
+      breakAndConnectNodes(parent, Branch.LEFT, leftTree);
+      breakAndConnectNodes(parent, Branch.RIGHT, middleTree);
     }
   }
 }

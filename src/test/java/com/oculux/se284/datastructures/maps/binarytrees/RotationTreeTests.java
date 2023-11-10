@@ -15,7 +15,7 @@ public class RotationTreeTests extends BinarySearchTreeTests {
         Node node = getNode(key);
         super.rotate(node);
       } catch (NodeNotFoundException e) {
-        fail("Node " + key + " not found");
+        throw new IllegalArgumentException(e);
       }
     }
   }
@@ -93,5 +93,43 @@ public class RotationTreeTests extends BinarySearchTreeTests {
     TestRotationTree tree = createTemplateRotationTree();
     tree.rotate(8);
     assertEquals("((((1)2)3(4))5(((6)7)8))", tree.toString());
+  }
+
+  @Test
+  public void testRotate9() {
+    TestRotationTree tree = createTemplateRotationTree();
+    try {
+      tree.rotate(9);
+      fail("Should have thrown exception");
+    } catch (IllegalArgumentException e) {
+      // Expected
+    }
+  }
+
+  @Test
+  public void testTwoRotates() {
+    TestRotationTree tree = createTemplateRotationTree();
+    tree.rotate(1);
+    tree.rotate(2);
+    assertEquals("((((1)2)3(4))5((6)7(8)))", tree.toString());
+  }
+
+  @Test
+  public void testThreeRotates() {
+    TestRotationTree tree = createTemplateRotationTree();
+    tree.rotate(1);
+    tree.rotate(2);
+    tree.rotate(3);
+    assertEquals("(((1)2)3((4)5((6)7(8))))", tree.toString());
+  }
+
+  @Test
+  public void testFourRotates() {
+    TestRotationTree tree = createTemplateRotationTree();
+    tree.rotate(1);
+    tree.rotate(2);
+    tree.rotate(3);
+    tree.rotate(4);
+    assertEquals("(((1)2)3(4(5((6)7(8)))))", tree.toString());
   }
 }

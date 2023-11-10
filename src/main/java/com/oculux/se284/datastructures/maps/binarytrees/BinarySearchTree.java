@@ -1,6 +1,5 @@
 package com.oculux.se284.datastructures.maps.binarytrees;
 
-import com.oculux.se284.Untested;
 import com.oculux.se284.datastructures.maps.Map;
 import com.oculux.se284.datastructures.maps.NodeNotFoundException;
 
@@ -25,11 +24,23 @@ public class BinarySearchTree implements Map {
       size++;
     }
 
+    protected Branch getParentDirection() {
+      return (this.parent.left == this) ? Branch.LEFT : Branch.RIGHT;
+    }
+
+    public Node getChild(Branch direction) {
+      return (direction == Branch.LEFT) ? left : right;
+    }
+
+    public String toStringIterative() {
+      String leftString = (left == null) ? "" : left.toStringIterative();
+      String rightString = (right == null) ? "" : right.toStringIterative();
+      return String.format("(%s%s%s)", leftString, key, rightString);
+    }
+
     @Override
     public String toString() {
-      String leftString = (left == null) ? "" : left.toString();
-      String rightString = (right == null) ? "" : right.toString();
-      return String.format("(%s%s%s)", leftString, key, rightString);
+      return String.valueOf(value);
     }
   }
 
@@ -170,16 +181,49 @@ public class BinarySearchTree implements Map {
     throw new NodeNotFoundException(key);
   }
 
+  private void breakConnection(Node node, Branch connectionDirection) {
+    if (node == null) {
+      return;
+    }
+
+    Node child = node.getChild(connectionDirection);
+    if (child == null) {
+      return;
+    }
+
+    if (connectionDirection == Branch.LEFT) {
+      node.left = null;
+    } else if (connectionDirection == Branch.RIGHT) {
+      node.right = null;
+    } else {
+      throw new IllegalArgumentException("Invalid connection direction");
+    }
+
+    child.parent = null;
+  }
+
+  protected void breakAndConnectNodes(Node parent, Branch connectionDirection, Node child) {
+    if (parent != null && child != null) {
+      breakConnection(parent, connectionDirection);
+      breakConnection(child.parent, connectionDirection);
+    }
+
+    connectNodes(parent, connectionDirection, child);
+  }
+
   protected void connectNodes(Node parent, Branch connectionDirection, Node child) {
     if (parent == null) {
       root = child;
+      child.parent = null;
       return;
     }
 
     if (connectionDirection == Branch.LEFT) {
       parent.left = child;
-    } else {
+    } else if (connectionDirection == Branch.RIGHT) {
       parent.right = child;
+    } else {
+      throw new IllegalArgumentException("Invalid connection direction");
     }
 
     if (child != null) {
@@ -193,6 +237,6 @@ public class BinarySearchTree implements Map {
       return "()";
     }
 
-    return root.toString();
+    return root.toStringIterative();
   }
 }
