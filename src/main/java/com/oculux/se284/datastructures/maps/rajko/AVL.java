@@ -1,5 +1,3 @@
-package com.oculux.se284.datastructures.maps.rajko;
-
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.IOException;
@@ -7,9 +5,9 @@ import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 
 /** A collated version of AVLTree submitted for extra credits in SE284. Cheers Rajko! */
-public class RajkoTree {
+public class AVL {
 
-  private static final int FILE_LENGTH = 10;
+  private static final int FILE_LENGTH = 1000000; // Number of rows in file
 
   public static void main(String... args) {
     try {
@@ -22,7 +20,7 @@ public class RajkoTree {
   private static void readFile() throws IOException {
     BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
     BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(System.out));
-    RajkoTree shell = new RajkoTree();
+    AVL shell = new AVL();
     AVLTree tree = shell.new AVLTree();
 
     for (int i = 0; i < FILE_LENGTH; i++) {
@@ -166,6 +164,50 @@ public class RajkoTree {
       } else {
         throw new IllegalStateException("Invalid balance: " + balance);
       }
+    }
+
+    protected void rotate(Node node) {
+      Node parent = (Node) node.parent;
+      if (parent == null) {
+        throw new IllegalArgumentException("Cannot rotate root node");
+      }
+
+      boolean isClockwiseRotation = (parent.left == node);
+      Node leftTree, middleTree, rightTree;
+
+      if (isClockwiseRotation) {
+        leftTree = (Node) node.left;
+        middleTree = (Node) node.right;
+        rightTree = (Node) parent.right;
+      } else {
+        leftTree = (Node) parent.left;
+        middleTree = (Node) node.left;
+        rightTree = (Node) node.right;
+      }
+
+      Node grandparent = (Node) parent.parent;
+      if (grandparent == null) {
+        breakAndConnectNodes(null, null, node);
+      } else if (grandparent.left == parent) {
+        breakAndConnectNodes(grandparent, Branch.LEFT, node);
+      } else {
+        breakAndConnectNodes(grandparent, Branch.RIGHT, node);
+      }
+
+      if (isClockwiseRotation) {
+        breakAndConnectNodes(node, Branch.LEFT, leftTree);
+        breakAndConnectNodes(node, Branch.RIGHT, parent);
+        breakAndConnectNodes(parent, Branch.LEFT, middleTree);
+        breakAndConnectNodes(parent, Branch.RIGHT, rightTree);
+      } else {
+        breakAndConnectNodes(node, Branch.LEFT, parent);
+        breakAndConnectNodes(node, Branch.RIGHT, rightTree);
+        breakAndConnectNodes(parent, Branch.LEFT, leftTree);
+        breakAndConnectNodes(parent, Branch.RIGHT, middleTree);
+      }
+
+      parent.refreshHeight();
+      node.refreshHeight();
     }
   }
 

@@ -4,9 +4,12 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.util.ArrayList;
+import java.util.Random;
+
 import org.junit.Test;
 
-import com.oculux.se284.datastructures.maps.rajko.RajkoTree.AVLTree;
+import com.oculux.se284.datastructures.maps.rajko.AVL.AVLTree;
 
 /**
  * Hacked together just for a sanity check.
@@ -15,11 +18,11 @@ import com.oculux.se284.datastructures.maps.rajko.RajkoTree.AVLTree;
 public class RajkoTreeTests {
 
   public static void main(String... args) {
-    RajkoTree.main(args);
+    AVL.main(args);
   }
 
   private AVLTree createMap() {
-    return new RajkoTree().new AVLTree();
+    return new AVL().new AVLTree();
   };
 
   @Test
@@ -212,5 +215,22 @@ public class RajkoTreeTests {
       map.remove(i);
     }
     assertEquals(40, map.size());
+  }
+
+  @Test
+  public void testPsuedoRandom() {
+    AVLTree map = createMap();
+    Random random = new Random(1);
+
+    for (int i = 0; i < 100; i++) {
+      int key = random.nextInt(100);
+      if (random.nextBoolean()) {
+        map.put(key, key);
+      } else {
+        map.contains(key);
+      }
+    }
+
+    System.out.println(map.toString());
   }
 }
