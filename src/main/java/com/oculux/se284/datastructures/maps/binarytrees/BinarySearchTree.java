@@ -25,6 +25,10 @@ public class BinarySearchTree implements Map {
     }
 
     protected Branch getParentDirection() {
+      if (this.parent == null) {
+        return null;
+      }
+
       return (this.parent.left == this) ? Branch.LEFT : Branch.RIGHT;
     }
 
@@ -205,7 +209,7 @@ public class BinarySearchTree implements Map {
   protected void breakAndConnectNodes(Node parent, Branch connectionDirection, Node child) {
     if (parent != null && child != null) {
       breakConnection(parent, connectionDirection);
-      breakConnection(child.parent, connectionDirection);
+      breakConnection(child.parent, child.getParentDirection());
     }
 
     connectNodes(parent, connectionDirection, child);

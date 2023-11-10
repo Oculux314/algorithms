@@ -10,6 +10,10 @@ public class SplayTree extends RotationTree {
     get(key);
   }
 
+  void putStatic(int key) {
+    super.put(key, key);
+  }
+
   @Override
   public int get(int key) {
     try {
