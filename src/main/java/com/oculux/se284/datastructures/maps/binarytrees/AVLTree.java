@@ -126,4 +126,13 @@ public class AVLTree extends RotationTree {
       throw new IllegalStateException("Invalid balance: " + balance);
     }
   }
+
+  @Override
+  protected void rotate(RotationTree.Node node) {
+    Node parent = (Node) node.parent;
+    super.rotate(node);
+
+    parent.refreshHeight();
+    ((Node) node).refreshHeight();
+  }
 }
