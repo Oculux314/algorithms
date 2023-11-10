@@ -154,7 +154,7 @@ public class BinarySearchTree implements Map {
     return size;
   }
 
-  private Node getNode(int key) throws NodeNotFoundException {
+  protected Node getNode(int key) throws NodeNotFoundException {
     Node current = root;
 
     while (current != null) {

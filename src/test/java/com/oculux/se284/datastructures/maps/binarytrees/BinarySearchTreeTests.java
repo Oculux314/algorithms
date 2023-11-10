@@ -13,23 +13,23 @@ public class BinarySearchTreeTests extends MapTests {
     return new BinarySearchTree();
   }
 
-  private BinarySearchTree createTemplateTree() {
+  protected BinarySearchTree createTemplateTree() {
     BinarySearchTree tree = (BinarySearchTree) createMap();
     tree.put(5, 5);
     tree.put(3, 3);
     tree.put(7, 7);
+    tree.put(4, 4);
     tree.put(2, 2);
     tree.put(6, 6);
     tree.put(8, 8);
+    tree.put(1, 1);
     return tree;
   }
 
   @Test
   public void testToString() {
-    System.out.println(createTemplateTree().toString());
-
     String string = createTemplateTree().toString();
-    assertEquals("(((2)3)5((6)7(8)))", string);
+    assertEquals("((((1)2)3(4))5((6)7(8)))", string);
   }
 
   @Test
